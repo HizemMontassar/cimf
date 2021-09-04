@@ -1,0 +1,130 @@
+  <div class="row justify-content-center">
+    <div class="col-lg-6 d-flex justify-content-center">
+                    <div class="card" style="width:2000rem;">
+                        <div class="card-body text-right">
+                                  <div class="container">
+
+                                    <form [formGroup]="formtest" (submit)="onSubmit()">
+
+                                      <div class="col-md-6 pull-right">
+
+
+                                        <div class="form-group">
+                                          <label>المعرف الوحيد</label>
+                                            <div>
+                                              <input type="text" formControlName="idUnique" class="form-control text-right" placeholder="الرجاء إدخال المعرف الوحيد"/>
+                                            </div>
+                                            <mat-error *ngIf="formtest.controls['idUnique'].invalid && (formtest.controls['idUnique'].dirty || formtest.controls['idUnique'].touched)">
+                                              <mat-error *ngIf="formtest.controls['idUnique'].errors?.required">
+                                                الرجاء إدخال المعرف الوحيد
+                                              </mat-error>
+                                              <mat-error *ngIf="formtest.controls['idUnique'].errors?.pattern">
+                                                المعرف الوحيد يتكون من حرف واحد و 4 ارقام
+                                              </mat-error>
+                                            </mat-error>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                        <label>الإسم و اللقب</label>
+                                          <div>
+                                              <input type="text" formControlName="nomPrenom" class="form-control text-right" placeholder="الرجاء إدخال الإسم و اللقب"/>
+                                              <mat-error *ngIf="formtest.controls['nomPrenom'].invalid && (formtest.controls['nomPrenom'].dirty || formtest.controls['nomPrenom'].touched)">
+                                                <mat-error *ngIf="formtest.controls['nomPrenom'].errors?.required">
+                                                  الرجاء إدخال الإسم و اللقب
+                                                </mat-error>
+                                              </mat-error>
+                                          </div>
+                                      </div>
+
+
+                                      <div class="form-group">
+                                        <label>مكان الإقامة</label>
+                                        <div>
+                                            <input type="text" formControlName="adresse" class="form-control text-right" placeholder="الرجاء إدخال مكان الإقامة"/>
+                                            <mat-error *ngIf="formtest.controls['adresse'].invalid && (formtest.controls['adresse'].dirty || formtest.controls['adresse'].touched)">
+                                                <mat-error *ngIf="formtest.controls['adresse'].errors?.required">
+                                                  الرجاء إدخال مكان الإقامة
+                                                </mat-error>
+                                              </mat-error>
+                                        </div>
+                                      </div>
+
+
+                                      <div class="form-group">
+                                        <label>كلمة المرور</label>
+                                        <div>
+                                          <input formControlName="password" class="form-control text-right" type="password" placeholder="الرجاء إدخال كلمة المرور">
+                                          <mat-error *ngIf="formtest.controls['password'].invalid && (formtest.controls['password'].dirty || formtest.controls['password'].touched)">
+                                            <mat-error *ngIf="formtest.controls['password'].errors?.required">
+                                              الرجاء إدخال كلمة المرور
+                                            </mat-error>
+                                          </mat-error>
+                                        </div>
+                                      </div>
+
+
+                                      </div>
+
+                                      <div class="col-md-6 pull-left">
+
+                                          <div class="form-group">
+                                            <label>المعرف الداخلي</label>
+                                              <div>
+                                                <input type="text" formControlName="matricule" class="form-control text-right" placeholder="الرجاء إدخال المعرف الداخلي"/>
+                                                <mat-error *ngIf="formtest.controls['matricule'].invalid && (formtest.controls['matricule'].dirty || formtest.controls['matricule'].touched)">
+                                                <mat-error *ngIf="formtest.controls['matricule'].errors?.required">
+                                                  الرجاء إدخال المعرف الداخلي
+                                                </mat-error>
+                                                <mat-error *ngIf="formtest.controls['matricule'].errors?.pattern">
+                                                  المعرف الداخلي يجب أن يكون طوله 10 حروف
+                                                </mat-error>
+                                              </mat-error>
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                            <label>رقم الهاتف</label>
+                                              <div>
+                                                  <input type="text" formControlName="numTel" class="form-control text-right" placeholder="الرجاء إدخال رقم الهاتف"/>
+                                                  <mat-error *ngIf="formtest.controls['numTel'].invalid && (formtest.controls['numTel'].dirty || formtest.controls['numTel'].touched)">
+                                                    <mat-error *ngIf="formtest.controls['numTel'].errors?.required">
+                                                      الرجاء إدخال رقم الهاتف
+                                                    </mat-error>
+                                                  </mat-error>
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                              <label>البريد الإلكتروني</label>
+                                              <div>
+                                                  <input type="text" formControlName="email" class="form-control text-right" placeholder="الرجاء إدخال البريد الإلكتروني"/>
+                                                  <mat-error *ngIf="formtest.controls['email'].invalid && (formtest.controls['email'].dirty || formtest.controls['email'].touched)">
+                                                      <mat-error *ngIf="formtest.controls['email'].errors?.required">
+                                                        الرجاء إدخال البريد الإلكتروني
+                                                      </mat-error>
+                                                      <mat-error *ngIf="formtest.controls['email'].errors?.email">
+                                                        الرجاء التثبت في البريد الإلكتروني
+                                                      </mat-error>
+                                                    </mat-error>
+                                              </div>
+                                            </div>
+
+
+                                      </div>
+
+
+                                      <div class="text-center">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-lg btn-block" [disabled]="!formtest.valid" [ngStyle]=" {'background-color': formtest.valid ? '#DE5961' : '#007500'} ">
+                                          إرسال
+                                        </button>
+                                      </div>
+
+                                    </form>
+
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+
+  </div>

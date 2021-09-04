@@ -1,0 +1,63 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+visibility: visible;
+  opacity: 1;
+}
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  position: relative;
+  transition: all 5s ease-in-out;
+  width: 100%;
+  height: 100%;
+
+}
+.popup .close {
+  position: absolute;
+  top: 0;
+
+  transition: all 200ms;
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+  cursor: pointer;
+}
+.popup .content {
+  width: 100%;
+  height: 90%;
+  overflow: auto;
+}
+@media screen and (max-width: 700px){
+
+  .popup{
+    width: 100%;
+  }
+}
+#type-conge-class{
+  height: 1.875rem;
+  width: 1.875rem;
+}
+#date-debut-class{
+  height: 1.875rem;
+  width: 3.125rem;
+}
+#date-fin-class{
+  height: 1.875rem;
+  width: 5rem;
+}
+.card{
+  margin-bottom: 23%;
+  margin-top: 5%;
+}

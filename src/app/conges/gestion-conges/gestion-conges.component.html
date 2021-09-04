@@ -1,0 +1,117 @@
+<app-navbar></app-navbar>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>CIMF - Centre Informatique de Ministère des Finances</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    </head>
+    <body>
+        <div class="header-bg">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4 class="page-title mb-0">إدارة العطل</h4>
+                                    <ol class="breadcrumb m-0">
+                                        <li *ngIf="role != 'administration'" class="breadcrumb-item"><a routerLink="/">CIMF</a></li>
+                                        <li *ngIf="role === 'administration'" class="breadcrumb-item"><a routerLink="/gestion-conges">CIMF</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">إدارة العطل</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card" *ngIf="count !=0">
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title">المطالب السابقة</h4>
+                                <div class="table-responsive mt-4">
+
+                                    <table mat-table matSort [dataSource]="conges" class="mat-elevation-z8 table table-hover mb-0">
+                                      <ng-container matColumnDef="nomPrenom">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color':'grey'}"><h6>الإسم و اللقب</h6></th>
+                                        <td mat-cell *matCellDef="let conge"> <strong>{{conge.nomPrenom}}</strong> </td>
+                                      </ng-container>
+
+                                      <ng-container matColumnDef="matricule">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color':'grey'}"><h6>المعرف الوحيد</h6></th>
+                                        <td mat-cell *matCellDef="let conge"> <strong>{{conge.matricule}}</strong> </td>
+                                      </ng-container>
+
+                                      <ng-container matColumnDef="typeConge">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color':'grey'}"><h6>نوعية العطلة</h6></th>
+                                        <td mat-cell *matCellDef="let conge"> <strong>{{conge.typeConge}}</strong> </td>
+                                      </ng-container>
+
+                                      <ng-container matColumnDef="afficherConge">
+                                        <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color':'black'}"></th>
+                                        <td mat-cell *matCellDef="let conge">
+                                          <button class="btn btn-lg btn-block" type="button" (click)="onClick(conge)" [ngStyle]="{'background-color':'#dc3545','color':'white'}"><strong>المطلب</strong></button>
+                                        </td>
+                                      </ng-container>
+
+                                      <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color':'black'}"></th>
+                                        <td mat-cell *matCellDef="let conge ; index as i">
+
+                                          <div *ngIf="role === 'direction'" >
+                                            <div *ngFor="let direction of conge.direction">
+                                              <div *ngIf="matricule===direction.directId && direction.directStatus===0 && conge.directionStatus === 0 && conge.administrationStatus === 0">
+                                                <button class="btn btn-lg btn-danger"  (click)="agreeDirectionButton(conge._id, conge.email, i); clicked = i" [disabled]="checkTable(i)" [ngStyle]=" rzlt ? {'display':'none'} : {'display':'inline'}">الموافقة</button>
+                                                <button class="btn btn-lg btn-success" (click)="disagreeDirectionButton(conge._id, conge.email, i); clicked = i" [disabled]="checkTable(i)" [ngStyle]=" rzlt ? {'display':'none'} : {'display':'inline'}">الرفض</button>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <div *ngIf="role === 'administration'">
+                                            <div>
+                                              <div>
+                                                <button class="btn btn-lg btn-danger" (click)="agreeAdministrationButton(conge._id, conge.email, i, conge.matricule, conge.typeConge, conge.dureeConge); clicked = i" [disabled]="checkTable(i)" [ngStyle]=" rzlt ? {'display':'none'} : {'display':'inline'}">الموافقة</button>
+                                                <button class="btn btn-lg btn-success" (click)="disagreeAdministrationButton(conge._id, conge.email, i); clicked = i" [disabled]="checkTable(i)" [ngStyle]=" rzlt ? {'display':'none'} : {'display':'inline'}">الرفض</button>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                        </td>
+                                      </ng-container>
+
+                                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                  </table>
+
+                                  <div class="overlay" *ngIf="popup">
+                                    <div class="popup">
+                                      <a class="close" (click)="popup = false">&times;</a>
+                                      <div class="content">
+                                        <app-demande-conge [conge]="conget"></app-demande-conge>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card text-center" id="testcolor"  *ngIf="count === 0">
+                              <h2>لا توجد مطالب عطللة حاليا</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

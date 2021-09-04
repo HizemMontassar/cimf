@@ -1,0 +1,86 @@
+<html lang="en">
+    <head>
+      <title>CIMF - Centre Informatique de Ministère des Finances</title>
+      <meta content="Admin Dashboard" name="description"/>
+      <meta content="Themesbrand" name="author"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    </head>
+    <body>
+        <div id="status"><div class="spinner"></div></div>
+        <div class="accountbg"></div>
+        <div class="wrapper-page">
+            <div class="card">
+                <div class="card-body">
+                    <div class="p-3 text-center">
+                        <a href="#" class="logo-admin"><img src="assets/images/logo.png" height="45" alt="logo"></a>
+                    </div>
+                    <div>
+                    <mat-tab-group  mat-align-tabs="center">
+                      <mat-tab label="الموظف">
+
+                        <form (submit)="onLoginEmploye(loginForm)" class="form-horizontal mt-4 col-11" #loginForm="ngForm">
+                          <div class="form-group text-right">
+                                <label for="username">المعرف الوحيد</label>
+                                <input type="text" class="form-control text-right" name="matricule" ngModel placeholder="أدخل المعرف الوحيد" #matriculeInput="ngModel" required>
+                            </div>
+                            <div class="form-group text-right">
+                                <label for="userpassword">كلمة السر</label>
+                                <input type="password" class="form-control text-right" name="password" ngModel placeholder="أدخل كلمة السر" #passwordInput="ngModel" required>
+                            </div>
+                            <div class="form-group row m-t-30">
+                                <div class="col-sm-6">
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-primary w-md waves-effect waves-light" type="submit">تسجيل الدخول</button>
+                                </div>
+                                <div class="alert alert-primary mt-3 mb-0 text-center" role="alert" *ngIf="successEmp===false">
+                                  المعرف الوحيد أو كلمة السر خاطئة
+                                </div>
+                                <div class="alert alert-success mt-3 mb-0 text-center" role="alert" *ngIf="successEmp===true">
+                                جاري تسجيل الدخول
+                                </div>
+                            </div>
+                            <div class="form-group mt-1 mb-0 row">
+                                <div class="col-12 text-center">
+                                    <a href="#" class="text-muted"><i class="mdi mdi-lock"></i>نسيت كلمة السر ؟</a>
+                                </div>
+                            </div>
+                        </form>
+
+                      </mat-tab>
+                      <mat-tab label="الإدارة العامة">
+                        <form (submit)="onLoginAdministration(loginAdministrationForm)" class="form-horizontal mt-4 col-11" #loginAdministrationForm="ngForm">
+                          <div class="form-group text-right">
+                                <label for="username">المعرف الوحيد</label>
+                                <input type="text" class="form-control text-right" name="matricule" ngModel placeholder="أدخل المعرف الوحيد" #matriculeInput="ngModel" required>
+                            </div>
+                            <div class="form-group text-right">
+                                <label for="userpassword">كلمة السر</label>
+                                <input type="password" class="form-control text-right" name="password" ngModel placeholder="أدخل كلمة السر" #passwordInput="ngModel" required>
+                            </div>
+                            <div class="form-group row m-t-30">
+                                <div class="col-sm-6">
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-primary w-md waves-effect waves-light" type="submit">تسجيل الدخول</button>
+                                </div>
+                                <div class="alert alert-primary mt-3 mb-0 text-center" role="alert" *ngIf="successAdmin===false">
+                                  المعرف الوحيد أو كلمة السر خاطئة
+                                </div>
+                                <div class="alert alert-success mt-3 mb-0 text-center" role="alert" *ngIf="successAdmin===true">
+                                جاري تسجيل الدخول
+                                </div>
+                            </div>
+                        </form>
+                      </mat-tab>
+                    </mat-tab-group>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

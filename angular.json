@@ -27,9 +27,21 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/app.js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/jquery.slimscroll.js",
+              "src/assets/js/modernizr.min.js",
+              "src/assets/js/waves.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/html2canvas/dist/html2canvas.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -94,6 +106,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []

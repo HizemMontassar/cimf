@@ -1,0 +1,151 @@
+  <div class="row justify-content-center">
+                  <div class="col-lg-6 d-flex justify-content-center">
+                      <div class="card" style="width:2000rem;">
+                          <div class="card-body text-right">
+                                    <div class="container">
+
+                                      <form [formGroup]="formtest" (submit)="onSubmit()">
+
+                                        <div class="form-group col-md-6 pull-right">
+                                          <label>المعرف الوحيد</label>
+                                            <div>
+                                              <input type="text" formControlName="idUnique" class="form-control text-right" placeholder="الرجاء إدخال المعرف الوحيد"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-left">
+                                          <label>المعرف الداخلي</label>
+                                            <div>
+                                              <input type="text" formControlName="matricule" class="form-control text-right" placeholder="الرجاء إدخال المعرف الداخلي"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-right">
+                                          <label>الإسم و اللقب</label>
+                                            <div>
+                                                <input type="text" formControlName="nomPrenom" class="form-control text-right" placeholder="الرجاء إدخال الإسم و اللقب"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-left">
+                                          <label>الرتبة</label>
+                                            <div>
+                                                <select formControlName="role" class="form-control">
+                                                  <option selected value="direction">Direction</option>
+                                                  <option value="employe">Employe</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-right">
+                                            <label>الخطة</label>
+                                            <div>
+                                                <input type="text" formControlName="emploi" class="form-control text-right" placeholder="الرجاء إدخال الخطة"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-left">
+                                          <label>التعيين</label>
+                                            <div>
+                                                <input formControlName="affectation" class="form-control text-right" type="text" placeholder="الرجاء إدخال التعيين"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-right">
+                                          <label>البريد الإلكتروني</label>
+                                          <div>
+                                              <input type="text" formControlName="adresse" class="form-control text-right" placeholder="الرجاء إدخال البريد الإلكتروني"/>
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-left">
+                                          <label>كلمة المرور</label>
+                                          <div>
+                                            <input formControlName="password" class="form-control text-right" type="password" placeholder="الرجاء إدخال كلمة المرور">
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group col-md-12 pull-right">
+                                          <label>عدد أيام العطل</label>
+                                          <div class="container col-md-12">
+                                            <div class="row">
+                                              <input formControlName="newAnnuel" class="form-control text-center col-md-3 mx-1" type="number" placeholder="السنوية">
+                                              <input formControlName="newExceptionnel" class="form-control text-center col-md-3 mx-1" type="number" placeholder="الإستثنائية">
+                                              <input formControlName="newCompensation" class="form-control text-center col-md-3 mx-1" type="number" placeholder="التعويضية">
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group col-md-12 pull-right my-2">
+                                          <div class="add-ancienConges-form" [formGroup]="formtest">
+                                            <label>سجل العطل السابقة</label>
+                                            <ng-container formArrayName="ancienConges">
+                                              <ng-container *ngFor="let ancienCongeForm of ancienConges.controls; let i=index">
+                                                <div class="lesson-form-row" [formGroupName]="i">
+
+                                                  <div class="container">
+                                                    <div class="row my-2">
+
+                                                      <input type="number" formControlName="annee" class="form-control text-center col-md-3 mx-1" placeholder="السنة">
+
+                                                      <input type="number" formControlName="annuel" class="form-control text-center col-md-2 mx-1" placeholder="سنوية">
+
+                                                      <input type="number" formControlName="exceptionnel" class="form-control text-center col-md-2 mx-1" placeholder="إستثنائية">
+
+                                                      <input type="number" formControlName="compensation" class="form-control text-center col-md-2 mx-1" placeholder="تعويضية">
+
+                                                      <button mat-mini-fab type="button" class="delete-btn mx-2 arrayButtons" (click)="deleteAncienConge(i)"><fa-icon [icon]="faTrash"></fa-icon></button>
+
+                                                    </div>
+
+                                                  </div>
+
+                                                </div>
+                                              </ng-container>
+                                              <div class="form-group">
+                                                <button class="arrayButtons" mat-mini-fab type="button" (click)="addAncienConge()">
+                                                  <mat-icon class="add-course-btn">add</mat-icon>
+                                                </button>
+                                          </div>
+                                            </ng-container>
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-right my-2">
+                                          <div class="add-direction-form" [formGroup]="formtest">
+                                            <label>المسؤولين</label>
+                                            <ng-container formArrayName="directions">
+                                              <ng-container *ngFor="let direction of directions.controls; let i=index">
+                                                <div class="lesson-form-row" [formGroupName]="i">
+                                                  <div class="container">
+                                                  <div class="row my-2">
+                                                    <input type="text" formControlName="direction" class="form-control text-center col-md-5" placeholder="المعرف الوحيد">
+                                                    <button mat-mini-fab type="button" class="delete-btn mx-2 arrayButtons" (click)="deleteDirection(i)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </ng-container>
+                                            <div class="form-group">
+                                              <button class="arrayButtons" mat-mini-fab type="button" (click)="addDirection()">
+                                                <mat-icon class="add-course-btn">add</mat-icon>
+                                              </button>
+                                            </div>
+                                          </ng-container>
+                                        </div>
+                                      </div>
+
+                                      <div class="text-center">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-lg btn-block" [disabled]="!formtest.valid" [ngStyle]=" {'background-color': formtest.valid ? '#DE5961' : '#007500'} ">
+                                          إرسال
+                                        </button>
+                                      </div>
+
+                                    </form>
+
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+

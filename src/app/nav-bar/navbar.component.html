@@ -1,0 +1,90 @@
+
+        <div class="header-bg">
+            <header id="topnav">
+                <div class="topbar-main">
+                    <div class="container-fluid">
+                        <div class="d-block d-lg-none mr-5">
+                            <a href="index.html" class="logo">
+                                <img src="assets/images/logo-sm.png" alt="" height="28" class="logo-small">
+                            </a>
+                        </div>
+                        <div class="menu-extras topbar-custom navbar p-0">
+                            <ul class="list-inline flags-dropdown d-none d-lg-block mb-0">
+                                <img src="assets/images/logo.png" alt="" height="30" width="" class="logo-large">
+                            </ul>
+
+                            <ul class="list-inline ml-auto mb-0">
+                                <li class="list-inline-item dropdown notification-list">
+                                    <div class="dropdown">
+                                      <img src="assets/images/users/avatar-6.jpg" alt="user" class="rounded-circle">
+                                      <span class="d-none d-md-inline-block ml-1">{{username}} <i class="mdi mdi-chevron-down"></i> </span>
+                                      <div class="dropdown-content">
+                                        <a class="logout-class" (click)="logout()">Logout</a>
+                                      </div>
+                                    </div>
+                                </li>
+                                <li class="menu-item list-inline-item">
+                                    <a class="navbar-toggle nav-link">
+                                        <div class="lines">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+                <div class="navbar-custom">
+                    <div class="container-fluid">
+                        <div class="d-none d-lg-block">
+                             <a href="index.html" class="logo">
+                            </a>
+                        </div>
+                        <div id="navigation">
+                            <ul class="navigation-menu">
+                                <li class="has-submenu" *ngIf="role==='direction' || role==='employe'">
+                                    <a routerLink="/" routerLinkActive="mat-accent"><i class="dripicons-meter"></i>الصفحة الرئيسية</a>
+                                </li>
+
+                                <li class="has-submenu" *ngIf="role==='direction' || role==='employe'">
+                                    <a routerLink="/ajouter-conge" routerLinkActive="mat-accent"><i class="dripicons-briefcase"></i>مطلب عطلة</a>
+                                </li>
+
+                                <li class="has-submenu" *ngIf="role==='direction' || role==='administration'">
+                                    <a routerLink="/gestion-conges" routerLinkActive="mat-accent"><i class="dripicons-briefcase"></i>إدارة العطل</a>
+                                </li>
+                                <li class="has-submenu" *ngIf="role==='direction' || role==='employe'">
+                                    <a routerLink="/jours-conge" routerLinkActive="mat-accent"><i class="dripicons-briefcase"></i>أيام العطلة</a>
+                                </li>
+                                <li class="has-submenu" *ngIf="role==='administration'">
+                                    <a routerLink="/utilisateurs" routerLinkActive="mat-accent"><i class="dripicons-briefcase"></i>الموظفين</a>
+                                </li>
+                                <li class="has-submenu" *ngIf="role==='administration'">
+                                    <a routerLink="/administrateurs" routerLinkActive="mat-accent"><i class="dripicons-briefcase"></i>الإدارة العامة</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            </div>
+
+
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/modernizr.min.js"></script>
+        <script src="assets/js/waves.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+        <script src="../plugins/peity-chart/jquery.peity.min.js"></script>
+        <script src="../plugins/morris/morris.min.js"></script>
+        <script src="../plugins/raphael/raphael-min.js"></script>
+        <script src="assets/pages/dashboard.js"></script>
+        <script src="assets/js/app.js"></script>
+

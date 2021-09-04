@@ -1,0 +1,13 @@
+#tooltip [disabled] {
+    pointer-events: none;
+    background-color: #DE5961;
+    color: white;
+}
+#tooltip {
+  background-color: #DE5961;
+  color: white;
+}
+
+mat-expansion-panel-header,mat-expansion-panel-header:hover,mat-expansion-panel {
+   background-color: #C5C5C5;
+}

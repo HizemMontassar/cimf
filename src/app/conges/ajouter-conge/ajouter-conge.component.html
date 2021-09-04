@@ -1,0 +1,530 @@
+<app-navbar></app-navbar>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>CIMF - Centre Informatique de Ministère des Finances</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    </head>
+    <body>
+            <div id="status">
+            </div>
+        <div class="header-bg">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4 class="page-title mb-0">مطلب عطلة</h4>
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a routerLink="/">CIMF</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">مطلب عطلة</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 d-flex justify-content-center">
+                    <div class="card" style="width:2000rem;">
+                        <div class="card-body text-right">
+                            <h4>مطلب عطلة</h4>
+                            <p class="text-muted m-b-30 font-500">.الرجاء ملء جميع خانات الإستمارة
+                            </p>
+                            <mat-tab-group class="text-right col-12">
+
+                              <mat-tab label="عطلة سنوية">
+                                  <div class="pull-right mt-3" *ngIf="nbJoursAnnuel > 0">
+                                    <form [formGroup]="formAnnuel" (submit)="onButtonClickAnnuel()" action="#" class="pull-right">
+                                        <div class="form-group col-m-6 pull-right">
+                                            <label>المعرف الوحيد</label>
+                                            <div>
+                                                <input type="text" formControlName="idUnique" class="form-control text-right" placeholder="الرجاء إدخال المعرف الوحيد"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>المعرف الداخلي</label>
+                                            <div>
+                                                <input type="text" formControlName="matricule" class="form-control text-right" placeholder="الرجاء إدخال المعرف الداخلي"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-md-6 pull-right">
+                                            <label>الإسم و اللقب</label>
+                                            <div>
+                                                <input type="text" formControlName="nomPrenom" class="form-control text-right" placeholder="الرجاء إدخال الإسم و اللقب"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>الخطة</label>
+                                            <div>
+                                                <input type="text" formControlName="emploi" class="form-control text-right" placeholder="الرجاء إدخال الخطة"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+                                            <label>الوظيفة</label>
+                                            <div>
+                                                <input type="text" formControlName="travail" class="form-control text-right" required placeholder="الرجاء إدخال الوظيفة"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>التعيين</label>
+                                            <div>
+                                                <input formControlName="affectation" class="form-control text-right" type="text" placeholder="الرجاء إدخال التعيين"/>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group col-md-12 pull-right">
+
+                                            <div class="col-md-6 float-right">
+                                                <label>مدتها</label>
+                                                <input class="form-control text-right" formControlName="dureeConge" type="number" min="1" max="{{nbJoursAnnuel}}" placeholder="الرجاء إدخال مدة العطلة"/>
+                                                <mat-error class="mb-2" *ngIf="formAnnuel.controls['dureeConge'].invalid && (formAnnuel.controls['dureeConge'].dirty || formAnnuel.controls['dureeConge'].touched)">
+                                                      <mat-error class="mb-2" *ngIf="formAnnuel.controls['dureeConge'].errors?.required">
+                                                        الرجاء إدخال مدة العطلة
+                                                      </mat-error>
+                                                      <mat-error class="mb-2" *ngIf="formAnnuel.controls['dureeConge'].errors?.max">
+                                                        الرجاء إدخال مدة لا تتجاوز {{nbJoursAnnuel}} يوم
+                                                      </mat-error>
+                                                      <mat-error class="mb-2" *ngIf="formAnnuel.controls['dureeConge'].errors?.min">
+                                                        الرجاء إدخال مدة عطلة لا تقل عن يوم واحد
+                                                      </mat-error>
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+
+                                                <mat-form-field appearance="fill">
+                                                  <mat-label>و ذلك من</mat-label>
+                                                  <input matInput [matDatepicker]="picker1" [readonly]="true" formControlName="dateDebut">
+                                                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                  <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>إلى غاية</mat-label>
+                                            <input matInput [matDatepicker]="picker2" [readonly]="true" formControlName="dateFin">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                          </mat-form-field>
+
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-right">
+                                                <label>رقم الهاتف</label>
+                                                <div class="mb-2">
+                                                    <input type="text" formControlName="numTel" class="form-control text-right" placeholder="الرجاء إدخال رقم الهاتف"/>
+                                                </div>
+                                                <mat-error class="mb-2" *ngIf="formAnnuel.controls['numTel'].invalid && (formAnnuel.controls['numTel'].dirty || formAnnuel.controls['numTel'].touched)">
+                                                  <mat-error class="mb-2" *ngIf="formAnnuel.controls['numTel'].errors?.required">
+                                                    الرجاء إدخال رقم الهاتف
+                                                  </mat-error>
+                                                  <mat-error class="mb-2" *ngIf="formAnnuel.controls['numTel'].errors?.pattern">
+                                                    الرجاء التثبت في رقم الهاتف
+                                                  </mat-error>
+                                                </mat-error>
+                                            </div>
+                                            <div class="form-group col-md-6 pull-left">
+                                                <label>عنوان الإقامة</label>
+                                                <div class="mb-2">
+                                                  <input class="form-control text-right" formControlName="adresse" type="text" placeholder="الرجاء إدخال عنوان الإقامة"/>
+                                                  <mat-error class="mb-2" *ngIf="formAnnuel.controls['adresse'].invalid && (formAnnuel.controls['adresse'].dirty || formAnnuel.controls['adresse'].touched)">
+                                                      <mat-error class="mb-2" *ngIf="formAnnuel.controls['adresse'].errors?.required">
+                                                        الرجاء إدخال عنوان الإقامة
+                                                      </mat-error>
+                                                </mat-error>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="text-center my-3">
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-lg btn-block" [disabled]="!formAnnuel.valid" [ngStyle]=" {'background-color': formAnnuel.valid ? '#DE5961' : '#007500'} ">
+                                                      إرسال
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </form>
+                                  </div>
+                                  <div class="pull-right mt-3" *ngIf="nbJoursAnnuel === 0">
+                                    <h4>عدد أيام العطل السنوية المتبقية لديك هي 0</h4>
+                                  </div>
+                              </mat-tab>
+
+                              <mat-tab label="عطلة إستثنائية">
+                                <div class="pull-right mt-3" *ngIf="nbJoursExceptionnel > 0">
+                                    <form [formGroup]="formExceptionnel" (submit)="onButtonClickExceptionnel()" action="#" class="pull-right">
+                                        <div class="form-group col-m-6 pull-right">
+                                            <label>المعرف الوحيد</label>
+                                            <div>
+                                                <input type="text" formControlName="idUnique" class="form-control text-right" placeholder="الرجاء إدخال المعرف الوحيد"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>المعرف الداخلي</label>
+                                            <div>
+                                                <input type="text" formControlName="matricule" class="form-control text-right" placeholder="الرجاء إدخال المعرف الداخلي"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-md-6 pull-right">
+                                            <label>الإسم و اللقب</label>
+                                            <div>
+                                                <input type="text" formControlName="nomPrenom" class="form-control text-right" placeholder="الرجاء إدخال الإسم و اللقب"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>الخطة</label>
+                                            <div>
+                                                <input type="text" formControlName="emploi" class="form-control text-right" placeholder="الرجاء إدخال الخطة"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+                                            <label>الوظيفة</label>
+                                            <div>
+                                                <input type="text" formControlName="travail" class="form-control text-right" required placeholder="الرجاء إدخال الوظيفة"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>التعيين</label>
+                                            <div>
+                                                <input formControlName="affectation" class="form-control text-right" type="text" placeholder="الرجاء إدخال التعيين"/>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group col-md-12 pull-right">
+
+                                            <div class="col-md-6 float-right">
+                                                <label>مدتها</label>
+                                                <input class="form-control text-right" formControlName="dureeConge" type="number" min="1" max="{{nbJoursExceptionnel}}" placeholder="الرجاء إدخال مدة العطلة"/>
+                                                <mat-error class="mb-2" *ngIf="formExceptionnel.controls['dureeConge'].invalid && (formExceptionnel.controls['dureeConge'].dirty || formExceptionnel.controls['dureeConge'].touched)">
+                                                      <mat-error class="mb-2" *ngIf="formExceptionnel.controls['dureeConge'].errors?.required">
+                                                        الرجاء إدخال مدة العطلة
+                                                      </mat-error>
+                                                      <mat-error class="mb-2" *ngIf="formExceptionnel.controls['dureeConge'].errors?.max">
+                                                        الرجاء إدخال مدة لا تتجاوز {{nbJoursExceptionnel}} أيام
+                                                      </mat-error>
+                                                      <mat-error class="mb-2" *ngIf="formExceptionnel.controls['dureeConge'].errors?.min">
+                                                        الرجاء إدخال مدة عطلة لا تقل عن يوم واحد
+                                                      </mat-error>
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+
+                                                <mat-form-field appearance="fill">
+                                                  <mat-label>و ذلك من</mat-label>
+                                                  <input matInput [matDatepicker]="picker3" [readonly]="true" formControlName="dateDebut">
+                                                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                                  <mat-datepicker #picker3></mat-datepicker>
+                                                </mat-form-field>
+
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>إلى غاية</mat-label>
+                                            <input matInput [matDatepicker]="picker4" [readonly]="true" formControlName="dateFin">
+                                            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker4></mat-datepicker>
+                                          </mat-form-field>
+
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-right">
+                                                <label>رقم الهاتف</label>
+                                                <div class="mb-2">
+                                                    <input type="text" formControlName="numTel" class="form-control text-right" placeholder="الرجاء إدخال رقم الهاتف"/>
+                                                </div>
+                                                <mat-error class="mb-2" *ngIf="formExceptionnel.controls['numTel'].invalid && (formExceptionnel.controls['numTel'].dirty || formExceptionnel.controls['numTel'].touched)">
+                                                  <mat-error class="mb-2" *ngIf="formExceptionnel.controls['numTel'].errors?.required">
+                                                    الرجاء إدخال رقم الهاتف
+                                                  </mat-error>
+                                                  <mat-error class="mb-2" *ngIf="formExceptionnel.controls['numTel'].errors?.pattern">
+                                                    الرجاء التثبت في رقم الهاتف
+                                                  </mat-error>
+                                                </mat-error>
+                                            </div>
+                                            <div class="form-group col-md-6 pull-left">
+                                                <label>عنوان الإقامة</label>
+                                                <div class="mb-2">
+                                                  <input class="form-control text-right" formControlName="adresse" type="text" placeholder="الرجاء إدخال عنوان الإقامة"/>
+                                                  <mat-error class="mb-2" *ngIf="formExceptionnel.controls['adresse'].invalid && (formExceptionnel.controls['adresse'].dirty || formExceptionnel.controls['adresse'].touched)">
+                                                      <mat-error class="mb-2" *ngIf="formExceptionnel.controls['adresse'].errors?.required">
+                                                        الرجاء إدخال عنوان الإقامة
+                                                      </mat-error>
+                                                </mat-error>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="text-center my-3">
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-lg btn-block" [disabled]="!formExceptionnel.valid" [ngStyle]=" {'background-color': formExceptionnel.valid ? '#DE5961' : '#007500'} ">
+                                                      إرسال
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </form>
+                                  </div>
+                                  <div class="pull-right mt-3" *ngIf="nbJoursExceptionnel === 0">
+                                    <h4>عدد أيام العطل الإستثنائية المتبقية لديك هي 0</h4>
+                                  </div>
+                              </mat-tab>
+
+                              <mat-tab label="عطلة تعويضية">
+                                <div class="pull-right mt-3" *ngIf="nbJoursCompensation > 0">
+                                    <form [formGroup]="formCompensation" (submit)="onButtonClickCompensation()" action="#" class="pull-right">
+                                        <div class="form-group col-m-6 pull-right">
+                                            <label>المعرف الوحيد</label>
+                                            <div>
+                                                <input type="text" formControlName="idUnique" class="form-control text-right" placeholder="الرجاء إدخال المعرف الوحيد"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>المعرف الداخلي</label>
+                                            <div>
+                                                <input type="text" formControlName="matricule" class="form-control text-right" placeholder="الرجاء إدخال المعرف الداخلي"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-md-6 pull-right">
+                                            <label>الإسم و اللقب</label>
+                                            <div>
+                                                <input type="text" formControlName="nomPrenom" class="form-control text-right" placeholder="الرجاء إدخال الإسم و اللقب"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>الخطة</label>
+                                            <div>
+                                                <input type="text" formControlName="emploi" class="form-control text-right" placeholder="الرجاء إدخال الخطة"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+                                            <label>الوظيفة</label>
+                                            <div>
+                                                <input type="text" formControlName="travail" class="form-control text-right" required placeholder="الرجاء إدخال الوظيفة"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>التعيين</label>
+                                            <div>
+                                                <input formControlName="affectation" class="form-control text-right" type="text" placeholder="الرجاء إدخال التعيين"/>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group col-md-12 pull-right">
+
+                                            <div class="col-md-6 float-right">
+                                                <label>مدتها</label>
+                                                <input class="form-control text-right" formControlName="dureeConge" type="number" min="1" max="{{nbJoursAnnuel}}" placeholder="الرجاء إدخال مدة العطلة"/>
+                                                <mat-error class="mb-2" *ngIf="formCompensation.controls['dureeConge'].invalid && (formCompensation.controls['dureeConge'].dirty || formCompensation.controls['dureeConge'].touched)">
+                                                      <mat-error class="mb-2" *ngIf="formCompensation.controls['dureeConge'].errors?.required">
+                                                        الرجاء إدخال مدة العطلة
+                                                      </mat-error>
+                                                      <mat-error class="mb-2" *ngIf="formCompensation.controls['dureeConge'].errors?.max">
+                                                        الرجاء إدخال مدة لا تتجاوز {{nbJoursCompensation}} يوم
+                                                      </mat-error>
+                                                      <mat-error class="mb-2" *ngIf="formCompensation.controls['dureeConge'].errors?.min">
+                                                        الرجاء إدخال مدة عطلة لا تقل عن يوم واحد
+                                                      </mat-error>
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+
+                                                <mat-form-field appearance="fill">
+                                                  <mat-label>و ذلك من</mat-label>
+                                                  <input matInput [matDatepicker]="picker5" [readonly]="true" formControlName="dateDebut">
+                                                  <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                                                  <mat-datepicker #picker5></mat-datepicker>
+                                                </mat-form-field>
+
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>إلى غاية</mat-label>
+                                            <input matInput [matDatepicker]="picker6" [readonly]="true" formControlName="dateFin">
+                                            <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker6></mat-datepicker>
+                                          </mat-form-field>
+
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-right">
+                                                <label>رقم الهاتف</label>
+                                                <div class="mb-2">
+                                                    <input type="text" formControlName="numTel" class="form-control text-right" placeholder="الرجاء إدخال رقم الهاتف"/>
+                                                </div>
+                                                <mat-error class="mb-2" *ngIf="formCompensation.controls['numTel'].invalid && (formCompensation.controls['numTel'].dirty || formCompensation.controls['numTel'].touched)">
+                                                  <mat-error class="mb-2" *ngIf="formCompensation.controls['numTel'].errors?.required">
+                                                    الرجاء إدخال رقم الهاتف
+                                                  </mat-error>
+                                                  <mat-error class="mb-2" *ngIf="formCompensation.controls['numTel'].errors?.pattern">
+                                                    الرجاء التثبت في رقم الهاتف
+                                                  </mat-error>
+                                                </mat-error>
+                                            </div>
+                                            <div class="form-group col-md-6 pull-left">
+                                                <label>عنوان الإقامة</label>
+                                                <div class="mb-2">
+                                                  <input class="form-control text-right" formControlName="adresse" type="text" placeholder="الرجاء إدخال عنوان الإقامة"/>
+                                                  <mat-error class="mb-2" *ngIf="formCompensation.controls['adresse'].invalid && (formCompensation.controls['adresse'].dirty || formCompensation.controls['adresse'].touched)">
+                                                      <mat-error class="mb-2" *ngIf="formCompensation.controls['adresse'].errors?.required">
+                                                        الرجاء إدخال عنوان الإقامة
+                                                      </mat-error>
+                                                </mat-error>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="text-center my-3">
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-lg btn-block" [disabled]="!formCompensation.valid" [ngStyle]=" {'background-color': formCompensation.valid ? '#DE5961' : '#007500'} ">
+                                                      إرسال
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </form>
+                                  </div>
+                                  <div class="pull-right mt-3" *ngIf="nbJoursCompensation === 0">
+                                    <h4>عدد أيام العطل التعويضية المتبقية لديك هي 0</h4>
+                                  </div>
+                              </mat-tab>
+
+                              <mat-tab label="أخرى">
+                                <div class="pull-right mt-3" *ngIf="nbJoursAnnuel > 0">
+                                    <form [formGroup]="formAutre" (submit)="onButtonClickAutre()" action="#" class="pull-right">
+                                        <div class="form-group col-m-6 pull-right">
+                                            <label>المعرف الوحيد</label>
+                                            <div>
+                                                <input type="text" formControlName="idUnique" class="form-control text-right" placeholder="الرجاء إدخال المعرف الوحيد"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>المعرف الداخلي</label>
+                                            <div>
+                                                <input type="text" formControlName="matricule" class="form-control text-right" placeholder="الرجاء إدخال المعرف الداخلي"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-md-6 pull-right">
+                                            <label>الإسم و اللقب</label>
+                                            <div>
+                                                <input type="text" formControlName="nomPrenom" class="form-control text-right" placeholder="الرجاء إدخال الإسم و اللقب"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>الخطة</label>
+                                            <div>
+                                                <input type="text" formControlName="emploi" class="form-control text-right" placeholder="الرجاء إدخال الخطة"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+                                            <label>الوظيفة</label>
+                                            <div>
+                                                <input type="text" formControlName="travail" class="form-control text-right" required placeholder="الرجاء إدخال الوظيفة"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-left">
+                                            <label>التعيين</label>
+                                            <div>
+                                                <input formControlName="affectation" class="form-control text-right" type="text" placeholder="الرجاء إدخال التعيين"/>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group col-md-12 pull-right">
+
+                                            <div class="col-md-6 float-right">
+                                                <label>مدتها</label>
+                                                <input class="form-control text-right" formControlName="dureeConge" type="number" min="1" max="{{nbJoursAnnuel}}" placeholder="الرجاء إدخال مدة العطلة"/>
+                                                <mat-error class="mb-2" *ngIf="formAutre.controls['dureeConge'].invalid && (formAutre.controls['dureeConge'].dirty || formAutre.controls['dureeConge'].touched)">
+                                                      <mat-error class="mb-2" *ngIf="formAutre.controls['dureeConge'].errors?.required">
+                                                        الرجاء إدخال مدة العطلة
+                                                      </mat-error>
+                                                      <mat-error class="mb-2" *ngIf="formAutre.controls['dureeConge'].errors?.max">
+                                                        الرجاء إدخال مدة لا تتجاوز {{nbJoursAnnuel}} يوم
+                                                      </mat-error>
+                                                      <mat-error class="mb-2" *ngIf="formAutre.controls['dureeConge'].errors?.min">
+                                                        الرجاء إدخال مدة عطلة لا تقل عن يوم واحد
+                                                      </mat-error>
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+
+                                                <mat-form-field appearance="fill">
+                                                  <mat-label>و ذلك من</mat-label>
+                                                  <input matInput [matDatepicker]="picker7" [readonly]="true" formControlName="dateDebut">
+                                                  <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+                                                  <mat-datepicker #picker7></mat-datepicker>
+                                                </mat-form-field>
+
+                                        </div>
+                                        <div class="form-group col-md-6 pull-right">
+
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>إلى غاية</mat-label>
+                                            <input matInput [matDatepicker]="picker8" [readonly]="true" formControlName="dateFin">
+                                            <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker8></mat-datepicker>
+                                          </mat-form-field>
+
+                                        </div>
+
+                                        <div class="form-group col-md-6 pull-right">
+                                                <label>رقم الهاتف</label>
+                                                <div class="mb-2">
+                                                    <input type="text" formControlName="numTel" class="form-control text-right" placeholder="الرجاء إدخال رقم الهاتف"/>
+                                                </div>
+                                                <mat-error class="mb-2" *ngIf="formAutre.controls['numTel'].invalid && (formAutre.controls['numTel'].dirty || formAutre.controls['numTel'].touched)">
+                                                  <mat-error class="mb-2" *ngIf="formAutre.controls['numTel'].errors?.required">
+                                                    الرجاء إدخال رقم الهاتف
+                                                  </mat-error>
+                                                  <mat-error class="mb-2" *ngIf="formAutre.controls['numTel'].errors?.pattern">
+                                                    الرجاء التثبت في رقم الهاتف
+                                                  </mat-error>
+                                                </mat-error>
+                                            </div>
+                                            <div class="form-group col-md-6 pull-left">
+                                                <label>عنوان الإقامة</label>
+                                                <div class="mb-2">
+                                                  <input class="form-control text-right" formControlName="adresse" type="text" placeholder="الرجاء إدخال عنوان الإقامة"/>
+                                                  <mat-error class="mb-2" *ngIf="formAutre.controls['adresse'].invalid && (formAutre.controls['adresse'].dirty || formAutre.controls['adresse'].touched)">
+                                                      <mat-error class="mb-2" *ngIf="formAutre.controls['adresse'].errors?.required">
+                                                        الرجاء إدخال عنوان الإقامة
+                                                      </mat-error>
+                                                </mat-error>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="text-center my-3">
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-lg btn-block" [disabled]="!formAutre.valid" [ngStyle]=" {'background-color': formAutre.valid ? '#DE5961' : '#007500'} ">
+                                                      إرسال
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </form>
+                                  </div>
+                                  <div class="pull-right mt-3" *ngIf="nbJoursAnnuel === 0">
+                                    <h4>عدد أيام العطل الأخرى المتبقية لديك هي 0</h4>
+                                  </div>
+                              </mat-tab>
+
+
+                            </mat-tab-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
